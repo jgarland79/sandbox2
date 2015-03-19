@@ -18,7 +18,7 @@ date >>${file}
 openssl rand -hex 4 >>${file}
 echo >>${file}
 
-git reset ./
+git reset HEAD ./
 
 git add ${file}
 
