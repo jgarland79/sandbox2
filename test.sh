@@ -12,7 +12,7 @@ git_repo='sandbox2'
 repo="${git_web}/${git_user}/${git_repo}.git"
 file="README.md"
 
-branch=$(date '+%Y%m%d%H%M%S')
+branch="$(date '+%Y%m%d%H%M%S')"
 
 random=$(openssl rand -hex 16)
 
@@ -27,9 +27,9 @@ git checkout HEAD ${file}
 
 #base_sha=$(git log -n 1 |head -n 1 |awk '{print $2}')
 
-date >>${file}
-echo ${random} >>${file}
 echo >>${file}
+echo ${branch} >>${file}
+echo ${random} >>${file}
 
 git reset HEAD ./
 
