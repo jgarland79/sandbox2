@@ -14,18 +14,21 @@ file="README.md"
 
 branch=$(date '+%Y%m%d%H%M%S')
 
+random=$(openssl rand -hex 16)
 
-rm -rf /tmp/foo
-mkdir /tmp/foo
-cd /tmp/foo
-git clone -n ${repo} --depth 1 /tmp/foo
+tmp_dir="/tmp/${random}"
+
+rm -rf ${tmp_dir}
+mkdir ${tmp_dir}
+cd ${tmp_dir}
+git clone -n ${repo} --depth 1 ${tmp_dir}
 
 git checkout HEAD ${file}
 
 #base_sha=$(git log -n 1 |head -n 1 |awk '{print $2}')
 
 date >>${file}
-openssl rand -hex 4 >>${file}
+echo ${random} >>${file}
 echo >>${file}
 
 git reset HEAD ./
@@ -70,4 +73,4 @@ curl -u "${git_user}:${git_pass}" \
 
 cd ${olddir}
 
-rm -rf /tmp/foo
+rm -rf ${tmp_dir}
